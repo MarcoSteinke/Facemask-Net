@@ -59,7 +59,12 @@ async function performTraining() {
   console.log('data loaded');
 
   // label data
-  let f;
+  let inputDataWithoutMask = [...document.querySelectorAll(".without_mask")]
+    .map((image) => {
+      return {}
+    });
+
+    // use p5 to transform the image into pixels
 }
 
 // wait for all images to load
