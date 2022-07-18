@@ -16,7 +16,10 @@ const WITH_MASK = "./public/with_mask/";
 
 const simpleImagesWithoutMask = loadImages(WITHOUT_MASK + "simple")
 const complexImagesWithoutMask = loadImages(WITHOUT_MASK + "complex")
+const simpleImagesWithMask = loadImages(WITH_MASK + "simple")
+const complexImagesWithMask = loadImages(WITH_MASK + "complex")
 
+const numberOfRenderedImages = 8;
 
-app.get('/', (req, res) => res.send(simpleImagesWithoutMask.concat(complexImagesWithoutMask)))
+app.get('/', (req, res) => res.render("index.ejs", {numberOfRenderedImages: numberOfRenderedImages, without_mask: simpleImagesWithoutMask.concat(complexImagesWithoutMask), with_mask: simpleImagesWithMask.concat(complexImagesWithMask)}))
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
