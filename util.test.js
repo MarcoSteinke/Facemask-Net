@@ -16,3 +16,7 @@ test("both cardinalities together correspond to the cardinality of the first set
 test("negative threshold is not accepted", () => {
     expect(splitDataset(-1, [1,2,3])).toStrictEqual([[], []]);
 })
+
+test("threshold greater than 1 is not accepted", () => {
+    expect(splitDataset(2, [1,2,3])).toStrictEqual([[], []]);
+})

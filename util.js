@@ -26,7 +26,7 @@ function loadImages(directoryPath) {
 }
 
 function splitDataset(threshold, dataset) {
-    return threshold >= 0 ? [dataset.slice(0, threshold), dataset.slice(threshold)] : [[], []];
+    return (threshold >= 0 && threshold <= 1) ? [dataset.slice(0, threshold), dataset.slice(threshold)] : [[], []];
 }
 
 module.exports = {loadImages, splitDataset};
