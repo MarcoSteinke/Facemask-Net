@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const port = 8080
 
+// Dataset has to be added to the public directory
+// We are using the "FMD_DATASET"
 app.use(express.static('public'));
 
 const loadImages = require('./util.js')
