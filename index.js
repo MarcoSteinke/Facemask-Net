@@ -6,6 +6,9 @@ const port = 8080
 // We are using the "FMD_DATASET"
 app.use(express.static('public'));
 
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
 const loadImages = require('./util.js')
 
 const WITHOUT_MASK = "./public/without_mask/";
