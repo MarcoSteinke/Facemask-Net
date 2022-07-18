@@ -61,8 +61,13 @@ async function performTraining() {
   // label data
   let inputDataWithoutMask = [...document.querySelectorAll(".without_mask")]
     .map((image) => {
-      return {}
+      return {input: image, label: "without_mask"}
     });
+
+  let inputDataWithMask = [...document.querySelectorAll(".with_mask")]
+    .map((image) => {
+      return {input: image, label: "with_mask"}
+  });
 
     // use p5 to transform the image into pixels
 }

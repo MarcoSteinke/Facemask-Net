@@ -25,4 +25,8 @@ function loadImages(directoryPath) {
     return loadedImages;
 }
 
-module.exports = loadImages;
+function splitDataset(treshold, dataset) {
+    return dataset;
+}
+
+module.exports = {loadImages, splitDataset};

@@ -9,7 +9,7 @@ app.use(express.static('public'));
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-const loadImages = require('./util.js')
+const {loadImages, splitDataset} = require('./util.js')
 
 const WITHOUT_MASK = "./public/without_mask/";
 const WITH_MASK = "./public/with_mask/";
