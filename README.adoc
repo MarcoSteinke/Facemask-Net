@@ -5,4 +5,4 @@
 Neural network which is able to classify if a person is wearing a mask or not. The data which is
 included in the "FMD_DATASET" includes images, such as the following:
 
-image::https://raw.githubusercontent.com/MarcoSteinke/Facemask-Net/main/screenshots/visualdata2.PNG[]
+image::https://raw.githubusercontent.com/MarcoSteinke/Facemask-Net/main/screenshots/visualdata2.png[]
