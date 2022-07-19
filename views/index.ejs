@@ -5,6 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.min.js' integrity='sha512-NxocnqsXP3zm0Xb42zqVMvjQIktKEpTIbCXXyhBPxqGZHqhcOXHs4pXI/GoZ8lE+2NJONRifuBpi9DxC58L0Lw==' crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
     <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -20,27 +22,21 @@
         
         return [WITHOUT_MASK, image].join((image.includes("simple")) ? "simple/" : "complex/")
     } %>
+    <% const imagesWithMaskUrls = with_mask; const imagesWithoutMaskUrls = without_mask; %>
     
     <div class="container">
         <h2>Without mask</h2>
         <div id="without_mask">
             <% for(let i = 0; i < numberOfRenderedImages; i++) { %>
                 <img class="without_mask" src="<%= renderWithoutMask(without_mask[i]) %>" width="128px" height="128px">
-                <% } %>
-                <% for(let i = numberOfRenderedImages; i < without_mask.length; i++) { %>
-                    <img class="without_mask" style="display: none;" src="<%= renderWithoutMask(without_mask[i]) %>" width="128px" height="128px">
-                    <% } %>
-                    
-                </div>
+            <% } %>      
+            </div>
                 <h2>With mask</h2>
                 <div id="with_mask">
                     <% for(let i = 0; i < numberOfRenderedImages; i++) { %>
                         <img class="with_mask" src="<%= renderWithMask(with_mask[i]) %>" width="128px" height="128px">
-                        <% } %>
-                        <% for(let i = numberOfRenderedImages; i < with_mask.length; i++) { %>
-                            <img class="with_mask" style="display: none;" src="<%= renderWithMask(with_mask[i]) %>" width="128px" height="128px">
-                            <% } %>
-                        </div>
+                    <% } %>
+                    </div>
                         
                     </div>
                     <!-- Optional JavaScript -->

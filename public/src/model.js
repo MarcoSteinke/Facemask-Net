@@ -1,8 +1,10 @@
-const IMAGE_WIDTH = 128;
-const IMAGE_HEIGHT = 128;
-const IMAGE_CHANNELS = 4;
+let nn, inputDataWithoutMask, inputDataWithMask, images = [];
 
-const options = {
+const IMAGE_WIDTH = 128;
+  const IMAGE_HEIGHT = 128;
+  const IMAGE_CHANNELS = 4;
+
+  const options = {
     epochs: 1024,
     batchSize: 48,
     layers: [
@@ -48,31 +50,50 @@ const options = {
       ],
     task: "imageClassification",
     inputs:[IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_CHANNELS],
-    outputs: ['label']
+    outputs: ['label'],
+    debug: true
   }
 
-const nn = ml5.neuralNetwork(options);
+nn = ml5.neuralNetwork(options);
 
-// method to perform after the dataset has been loaded
-// make method asynchronous, so we can use it as a promise
-async function performTraining() {
+// wait for all images to load
+//let lastDatasetImage = [...document.querySelectorAll('.with_mask')].pop();
+// execute "performTraining" after all images have been loaded
+//lastDatasetImage.addEventListener('load', performTraining)
+
+const getImage = async (path, label) => {
+  const response = await fetch(path)
+  const blob = await response.blob()
+  const resourceUrl = URL.createObjectURL(blob)
+
+  images.push({image: window.loadImage(resourceUrl), label: label})  // this is p5.js loadImage
+}
+
+async function performTraining(data) {
   console.log('data loaded');
 
   // label data
-  let inputDataWithoutMask = [...document.querySelectorAll(".without_mask")]
-    .map((image) => {
-      return {input: image, label: "without_mask"}
-    });
+  data.without_mask
+    .forEach((image) => 
+      getImage(`/without_mask/${
+        (image.includes("simple")) ? "simple/" + image : "complex/" + image}`));
 
-  let inputDataWithMask = [...document.querySelectorAll(".with_mask")]
-    .map((image) => {
-      return {input: image, label: "with_mask"}
-  });
+  data.with_mask
+    .forEach((image) => 
+      getImage(`/with_mask/${
+        (image.includes("simple")) ? "simple/" + image : "complex/" + image}`));
 
-    // use p5 to transform the image into pixels
+  images.forEach(
+    (data) => {
+      nn.addData({image: data.image}, {label: data.label});
+    }
+  )
+
+  //nn.normalizeData();
+
+  //nn.train(options, console.log("finished training"));
 }
 
-// wait for all images to load
-let lastDatasetImage = [...document.querySelectorAll('.with_mask')].pop();
-// execute "performTraining" after all images have been loaded
-lastDatasetImage.addEventListener('load', performTraining)
+function setup() {
+  fetch("http://localhost:8080/images").then(result => {return result.json()}).then(json => performTraining(json));
+}

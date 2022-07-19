@@ -20,6 +20,6 @@ const simpleImagesWithMask = loadImages(WITH_MASK + "simple")
 const complexImagesWithMask = loadImages(WITH_MASK + "complex")
 
 const numberOfRenderedImages = 8;
-
 app.get('/', (req, res) => res.render("index.ejs", {numberOfRenderedImages: numberOfRenderedImages, without_mask: simpleImagesWithoutMask.concat(complexImagesWithoutMask), with_mask: simpleImagesWithMask.concat(complexImagesWithMask)}))
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.get('/images', (req, res) => res.json({numberOfRenderedImages: numberOfRenderedImages, without_mask: simpleImagesWithoutMask.concat(complexImagesWithoutMask), with_mask: simpleImagesWithMask.concat(complexImagesWithMask)}))
+app.listen(port, () => console.log(`Visit http://localhost:${port}!`))
