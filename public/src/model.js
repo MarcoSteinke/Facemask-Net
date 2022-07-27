@@ -110,12 +110,8 @@ function dataLoaded(loadedImages, rawImages) {
     results.forEach((result,i) => {
       console.log(`image ${i} loaded`)
       nn.addData({image: result}, {label: (i < 100) ? "without_mask" : "with_mask"})
-      //image(result.image, 128, 128)
     })
     document.body.insertAdjacentHTML("afterbegin", results[0].image.loadPixels() + ", " + results[0].label + "<br>".repeat(2))
-    // train
-    //nn.addData({image: results[0].image, label: new Array(results[0].label)})
-    //document.body.insertAdjacentHTML("afterbegin", nn.data)
     //nn.normalizeData();
     //nn.train(trainingOptions);
   })
